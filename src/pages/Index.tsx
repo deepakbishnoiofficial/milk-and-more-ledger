@@ -1,20 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, CheckCircle2, MessageCircle, Milk, Receipt, Users } from "lucide-react";
+import { Calendar as CalIcon, CheckCircle2, MessageCircle, Milk, Receipt, Users } from "lucide-react";
 import SEO from "@/components/SEO";
-import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const { toast } = useToast();
-
-  const handleCTA = (role: "seller" | "customer") => {
-    toast({
-      title: `Welcome, ${role === "seller" ? "Seller" : "Customer"}!`,
-      description:
-        "Dashboards are coming next. For now, explore features below and confirm if you'd like me to build the panels.",
-    });
-  };
-
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -35,19 +24,13 @@ const Index = () => {
 
       <header className="border-b">
         <div className="container flex items-center justify-between py-4">
-          <a href="#" className="font-semibold">
+          <a href="/" className="font-semibold">
             Milk & More Ledger
           </a>
-          <nav className="flex items-center gap-2">
-            <a href="#features" className="text-sm hover:underline">
-              Features
-            </a>
-            <a href="#how-it-works" className="text-sm hover:underline">
-              How it works
-            </a>
-            <a href="#get-started" className="text-sm hover:underline">
-              Get started
-            </a>
+          <nav className="flex items-center gap-4 text-sm">
+            <a href="/seller" className="hover:underline">Seller</a>
+            <a href="/customer" className="hover:underline">Customer</a>
+            <a href="#features" className="hover:underline">Features</a>
           </nav>
         </div>
       </header>
@@ -61,14 +44,15 @@ const Index = () => {
                 Milk & Grocery Ledger for Sellers and Customers
               </h1>
               <p className="mt-4 text-lg text-muted-foreground">
-                Record daily morning/evening milk, other items, custom price per
-                customer, and send monthly bills on WhatsApp—fast and simple.
+                Record daily morning/evening milk, other items, custom price per customer, and send monthly bills on WhatsApp.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button onClick={() => handleCTA("seller")}>I'm a Seller</Button>
-                <Button variant="outline" onClick={() => handleCTA("customer")}>
-                  I'm a Customer
-                </Button>
+                <a href="/seller">
+                  <Button>I'm a Seller</Button>
+                </a>
+                <a href="/customer">
+                  <Button variant="outline">I'm a Customer</Button>
+                </a>
               </div>
             </div>
           </div>
@@ -102,7 +86,7 @@ const Index = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Calendar className="h-5 w-5" /> Monthly Calendar
+                  <CalIcon className="h-5 w-5" /> Monthly Calendar
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
@@ -140,63 +124,6 @@ const Index = () => {
               </CardHeader>
               <CardContent className="text-muted-foreground">
                 Track paid/unpaid. Auto reminders until paid; verify cash or online.
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* How it works */}
-        <section id="how-it-works" className="border-t border-b bg-card/50">
-          <div className="container py-16 md:py-20">
-            <div className="grid gap-8 md:grid-cols-3">
-              <div>
-                <h3 className="text-xl font-semibold">1. Add customers</h3>
-                <p className="mt-2 text-muted-foreground">
-                  Enter name, phone, and price per liter. Open their calendar.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold">2. Record daily</h3>
-                <p className="mt-2 text-muted-foreground">
-                  AM/PM milk, other items, or mark none. Customer can also edit.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold">3. Send bill</h3>
-                <p className="mt-2 text-muted-foreground">
-                  Auto total at month end and share the bill via WhatsApp.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Get Started */}
-        <section id="get-started" className="container py-16 md:py-20">
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>For Sellers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Manage customers, calendars, pricing, bills, and reminders.
-                </p>
-                <Button onClick={() => handleCTA("seller")}>Open Seller Panel</Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>For Customers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  View and edit your daily entries, see totals and monthly dues.
-                </p>
-                <Button variant="outline" onClick={() => handleCTA("customer")}>
-                  Open Customer Panel
-                </Button>
               </CardContent>
             </Card>
           </div>
