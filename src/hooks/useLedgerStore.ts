@@ -171,19 +171,24 @@ export const useLedgerStore = () => {
     (customer: Customer, date: Date) => {
       const { totalMilkLiters, milkAmount, otherAmount, grandTotal } = computeTotals(customer, date);
       const yearMonth = ym(date);
-      const header = `Monthly Bill - ${yearMonth}`;
+      const header = `🥛 Monthly Bill - ${yearMonth}`;
       const lines = [
         header,
-        `Name: ${customer.name}`,
-        `Phone: ${customer.phone}`,
-        `Milk price: ₹${customer.milkPrice}/L`,
-        `Total milk: ${totalMilkLiters} L = ₹${milkAmount}`,
-        `Other items: ₹${otherAmount}`,
-        `Grand total: ₹${grandTotal}`,
-        `\nPlease pay your dues. Thank you!`,
+        `👤 Name: ${customer.name}`,
+        `📞 Phone: ${customer.phone}`,
+        `💰 Milk price: ₹${customer.milkPrice}/L`,
+        `🥛 Total milk: ${totalMilkLiters} L = ₹${milkAmount}`,
+        `🛒 Other items: ₹${otherAmount}`,
+        `━━━━━━━━━━━━━━━`,
+        `💵 Grand total: ₹${grandTotal}`,
+        ``,
+        `Please pay your dues. Thank you! 🙏`,
       ];
       const text = encodeURIComponent(lines.join("\n"));
-      return `https://wa.me/${customer.phone}?text=${text}`;
+      // Ensure phone has country code (default to India +91 if 10 digits)
+      let phone = customer.phone.replace(/\D/g, "");
+      if (phone.length === 10) phone = "91" + phone;
+      return `https://wa.me/${phone}?text=${text}`;
     },
     [computeTotals]
   );
